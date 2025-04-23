@@ -180,13 +180,13 @@
 #endif
 
 #ifdef __DEVKITARM__
-#define LJ_TARGET_CONSOLE 1
+// #define LJ_TARGET_CONSOLE 1
 #define LJ_TARGET_NDS 1
-// #define LJ_ARCH_PPC32ON64	1
-// #define LJ_NO_SYSTEM 1
-// #define LUAJIT_ENABLE_JIT 0
+#define LJ_ARCH_PPC32ON64	1
+#define LJ_NO_SYSTEM 1
+#define LUAJIT_ENABLE_JIT 0
 // #define LJ_OS_NOJIT 1
-// #define LJ_HASFFI		1
+#define LJ_HASFFI		1
 #endif
 
 /* -- Arch-specific settings ---------------------------------------------- */

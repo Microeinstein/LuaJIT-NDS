@@ -147,6 +147,33 @@ static int mcode_setprot(void *p, size_t sz, int prot)
 #endif
 }
 
+#elif LJ_TARGET_NDS
+
+#define MCPROT_RW	1
+#define MCPROT_RX	2
+#define MCPROT_RWX	3
+
+static void *mcode_alloc_at(jit_State *J, uintptr_t hint, size_t sz, int prot)
+{
+  UNUSED(J); UNUSED(hint); UNUSED(prot);
+  void *p = malloc(sz);
+  if (!p)
+    lj_trace_err(J, LJ_TRERR_MCODEAL);
+  return p;
+}
+
+static void mcode_free(jit_State *J, void *p, size_t sz)
+{
+  UNUSED(J); UNUSED(sz);
+  free(p);
+}
+
+static int mcode_setprot(void *p, size_t sz, int prot)
+{
+  UNUSED(p); UNUSED(sz); UNUSED(prot);
+  return 0;
+}
+
 #else
 
 #error "Missing OS support for explicit placement of executable memory"
