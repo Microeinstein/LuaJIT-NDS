@@ -9,3 +9,6 @@
 *.dmp
 *.swp
 .tags
+
+src/minilua
+src/buildvm

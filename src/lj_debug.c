@@ -367,7 +367,7 @@ void lj_debug_addloc(lua_State *L, const char *msg,
 	GCproto *pt = funcproto(fn);
 	char buf[LUA_IDSIZE];
 	lj_debug_shortname(buf, proto_chunkname(pt), pt->firstline);
-	lj_strfmt_pushf(L, "%s:%d: %s", buf, line, msg);
+	lj_strfmt_pushf(L, "%s:" LJ_PRID32 ": %s", buf, line, msg);
 	return;
       }
     }
@@ -391,13 +391,13 @@ void lj_debug_pushloc(lua_State *L, GCproto *pt, BCPos pc)
 	s += i+1;
 	break;
       }
-    lj_strfmt_pushf(L, "%s:%d", s, line);
+    lj_strfmt_pushf(L, "%s:" LJ_PRID32, s, line);
   } else if (len > 40) {
-    lj_strfmt_pushf(L, "%p:%d", pt, line);
+    lj_strfmt_pushf(L, "%p:" LJ_PRID32, pt, line);
   } else if (*s == '=') {
-    lj_strfmt_pushf(L, "%s:%d", s+1, line);
+    lj_strfmt_pushf(L, "%s:" LJ_PRID32, s+1, line);
   } else {
-    lj_strfmt_pushf(L, "\"%s\":%d", s, line);
+    lj_strfmt_pushf(L, "\"%s\":" LJ_PRID32, s, line);
   }
 }
 
