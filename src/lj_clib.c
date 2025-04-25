@@ -115,17 +115,26 @@ static const char *clib_resolve_lds(lua_State *L, const char *name)
 
 static void *clib_loadlib(lua_State *L, const char *name, int global)
 {
+#ifdef LJ_TARGET_NDS
+#define LJ_RTLD_MODE RTLD_NOW
+#else
+#define LJ_RTLD_MODE RTLD_LAZY
+#endif
+
   void *h = dlopen(clib_extname(L, name),
-		   RTLD_LAZY | (global?RTLD_GLOBAL:RTLD_LOCAL));
+		   LJ_RTLD_MODE | (global?RTLD_GLOBAL:RTLD_LOCAL));
   if (!h) {
     const char *e, *err = dlerror();
     if (err && *err == '/' && (e = strchr(err, ':')) &&
 	(name = clib_resolve_lds(L, strdata(lj_str_new(L, err, e-err))))) {
-      h = dlopen(name, RTLD_LAZY | (global?RTLD_GLOBAL:RTLD_LOCAL));
+      h = dlopen(name, LJ_RTLD_MODE | (global?RTLD_GLOBAL:RTLD_LOCAL));
       if (h) return h;
       err = dlerror();
     }
     if (!err) err = "dlopen failed";
+#ifdef LJ_TARGET_NDS
+    printf("%s\n", err);
+#endif
     lj_err_callermsg(L, err);
   }
   return h;

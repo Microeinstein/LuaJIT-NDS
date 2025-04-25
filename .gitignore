@@ -8,7 +8,9 @@
 *.manifest
 *.dmp
 *.swp
+*.d
 .tags
+.cache/
 
 src/minilua
 src/buildvm

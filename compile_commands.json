@@ -1,0 +1,79 @@
+[
+{
+  "arguments": [
+    "/opt/wonderful/toolchain/gcc-arm-none-eabi/bin/arm-none-eabi-as",
+    "-o",
+    "lj_vm.o",
+    "lj_vm.s"
+  ],
+  "directory": "/mnt/files/Sviluppo/Labo/LuaJITDS/foreign/luajit/src",
+  "file": "lj_vm.s",
+  "output": "lj_vm.o"
+},
+{
+  "arguments": [
+    "/opt/wonderful/toolchain/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "-mthumb",
+    "-mcpu=arm946e-s+nofp",
+    "-isystem",
+    "/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/machine",
+    "-isystem",
+    "/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include/sys",
+    "-isystem",
+    "/opt/wonderful/thirdparty/blocksds/core/libs/libnds/include",
+    "-isystem",
+    "/opt/wonderful/toolchain/gcc-arm-none-eabi/arm-none-eabi/include",
+    "-c",
+    "-g",
+    "-MMD",
+    "-MP",
+    "-Wall",
+    "-Wextra",
+    "-Wfatal-errors",
+    "-fomit-frame-pointer",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-DARM9",
+    "-D__NDS__",
+    "-DSDK_BLOCKSDS",
+    "-DUSE_NITRO",
+    "-g",
+    "-Og",
+    "-DDEBUG",
+    "-specs=/opt/wonderful/thirdparty/blocksds/core/sys/crts/ds_arm9.specs",
+    "-DLJ_TARGET_NDS",
+    "-DLUAJIT_USE_SYSMALLOC",
+    "-DLUAJIT_SECURITY_PRNG=0",
+    "-o",
+    "ljamalg.o",
+    "ljamalg.c"
+  ],
+  "directory": "/mnt/files/Sviluppo/Labo/LuaJITDS/foreign/luajit/src",
+  "file": "ljamalg.c",
+  "output": "ljamalg.o"
+},
+{
+  "arguments": [
+    "/opt/wonderful/toolchain/gcc-arm-none-eabi/bin/arm-none-eabi-ar",
+    "rc",
+    "libluajitD.a",
+    "ljamalg.o",
+    "lj_vm.o"
+  ],
+  "directory": "/mnt/files/Sviluppo/Labo/LuaJITDS/foreign/luajit/src",
+  "file": "ljamalg.o",
+  "output": "libluajitD.a"
+},
+{
+  "arguments": [
+    "/opt/wonderful/toolchain/gcc-arm-none-eabi/bin/arm-none-eabi-ar",
+    "rc",
+    "libluajitD.a",
+    "ljamalg.o",
+    "lj_vm.o"
+  ],
+  "directory": "/mnt/files/Sviluppo/Labo/LuaJITDS/foreign/luajit/src",
+  "file": "lj_vm.o",
+  "output": "libluajitD.a"
+}
+]
